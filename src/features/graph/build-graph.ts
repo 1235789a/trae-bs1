@@ -5,7 +5,7 @@ export function buildDecisionGraph(pkg: CanonicalContextPackage): GraphData {
   const nodes: GraphData["nodes"] = [];
   const edges: GraphData["edges"] = [];
 
-  nodes.push({ id: "src", type: "source", label: "Source", description: pkg.task.title, status: "confirmed", evidenceRefs: [], x: 0, y: 0 });
+  nodes.push({ id: "src", type: "source", label: "来源", description: pkg.task.title, status: "confirmed", evidenceRefs: [], x: 0, y: 0 });
 
   let yOff = 1;
   for (const f of pkg.facts) {

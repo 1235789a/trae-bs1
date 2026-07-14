@@ -91,7 +91,7 @@ export function ExportView({ pkg }: ExportViewProps) {
           下载
         </Button>
         <span className="ml-auto text-xs text-slate-500">
-          {lineCount.toLocaleString()} lines
+          {lineCount.toLocaleString()} 行
         </span>
       </div>
 

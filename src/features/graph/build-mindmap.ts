@@ -8,12 +8,12 @@ export function buildMindMap(pkg: CanonicalContextPackage): GraphData {
   nodes.push({ id: "center", type: "source", label: pkg.task.title, description: pkg.summary.oneSentence, status: "confirmed", evidenceRefs: [], x: 0, y: 0 });
 
   const branches = [
-    { id: "b_state", label: "State", items: pkg.currentState, nodeType: "fact" as const },
-    { id: "b_dec", label: "Decisions", items: pkg.decisions, nodeType: "decision" as const },
-    { id: "b_con", label: "Constraints", items: pkg.constraints, nodeType: "constraint" as const },
-    { id: "b_art", label: "Artifacts", items: pkg.artifacts, nodeType: "fact" as const },
-    { id: "b_risk", label: "Risks", items: pkg.risks, nodeType: "risk" as const },
-    { id: "b_next", label: "Next Steps", items: pkg.nextActions, nodeType: "next_action" as const },
+    { id: "b_state", label: "当前状态", items: pkg.currentState, nodeType: "fact" as const },
+    { id: "b_dec", label: "关键决策", items: pkg.decisions, nodeType: "decision" as const },
+    { id: "b_con", label: "约束条件", items: pkg.constraints, nodeType: "constraint" as const },
+    { id: "b_art", label: "项目产物", items: pkg.artifacts, nodeType: "fact" as const },
+    { id: "b_risk", label: "风险", items: pkg.risks, nodeType: "risk" as const },
+    { id: "b_next", label: "下一步行动", items: pkg.nextActions, nodeType: "next_action" as const },
   ];
 
   const step = (2 * Math.PI) / branches.length;

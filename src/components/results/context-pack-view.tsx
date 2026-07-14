@@ -251,7 +251,7 @@ function ContradictionsSection({ items }: { items: CanonicalContextPackage["cont
             <CardContent className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="text-[10px]">
-                  Resolution: {c.resolution}
+                  处理方式: {c.resolution}
                 </Badge>
               </div>
               {c.evidenceRefs.length > 0 && (
@@ -305,7 +305,15 @@ export function ContextPackView({ pkg }: ContextPackViewProps) {
           </div>
           <div>
             <span className="text-xs text-slate-500">目标智能体</span>
-            <Badge className="mt-0.5">{pkg.task.targetAgent}</Badge>
+            <Badge className="mt-0.5">{
+              {
+                coding: "代码智能体",
+                writing: "写作智能体",
+                product: "产品智能体",
+                research: "研究智能体",
+                general: "通用智能体",
+              }[pkg.task.targetAgent] ?? pkg.task.targetAgent
+            }</Badge>
           </div>
           <div className="col-span-2">
             <span className="text-xs text-slate-500">期望结果</span>
