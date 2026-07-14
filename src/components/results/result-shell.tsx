@@ -92,10 +92,10 @@ export function ResultShell() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h2 className="text-sm font-semibold text-slate-900">
-            Compilation Result
+            编译结果
           </h2>
           <Badge variant={isDemo ? "warning" : "success"}>
-            {isDemo ? "DEMO MODE" : "LIVE"}
+            {isDemo ? "示例模式" : "实时 AI"}
           </Badge>
           <span className="text-xs text-slate-400">
             {result.durationMs}ms &middot; {pkg.packageId.slice(0, 12)}
