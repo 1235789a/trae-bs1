@@ -20,12 +20,12 @@ const SEVERITY_BADGE: Record<string, "warning" | "destructive"> = {
 const TYPE_LABELS: Record<SensitiveType, string> = {
   api_key: "API Key",
   github_token: "GitHub Token",
-  password: "Password",
-  private_key: "Private Key",
-  email: "Email",
-  phone: "Phone Number",
-  id_number: "ID Number",
-  wallet_address: "Wallet Address",
+  password: "密码",
+  private_key: "私钥",
+  email: "邮箱",
+  phone: "手机号",
+  id_number: "身份证号",
+  wallet_address: "钱包地址",
 };
 
 /* ------------------------------------------------------------------ */
@@ -54,11 +54,11 @@ export function PrivacyPanel() {
       <div className="flex items-center gap-2">
         <Shield className="h-5 w-5 text-slate-700" />
         <h3 className="text-sm font-semibold text-slate-900">
-          Privacy Scan Results
+          隐私扫描结果
         </h3>
         <span className="ml-auto text-xs text-slate-500">
-          {findings.length} finding{findings.length !== 1 ? "s" : ""} &middot;{" "}
-          {redactedCount} redacted &middot; {keptCount} kept
+          {findings.length} 项发现 &middot;{" "}
+          {redactedCount} 已脱敏 &middot; {keptCount} 保留
         </span>
       </div>
 
@@ -82,7 +82,7 @@ export function PrivacyPanel() {
             >
               {/* Severity badge */}
               <Badge variant={SEVERITY_BADGE[f.severity] ?? "warning"} className="mt-0.5 shrink-0">
-                {f.severity}
+                {f.severity === "high" ? "高" : f.severity === "medium" ? "中" : "低"}
               </Badge>
 
               {/* Info */}
@@ -110,12 +110,12 @@ export function PrivacyPanel() {
                 {isRedacted ? (
                   <>
                     <Eye className="h-3 w-3" />
-                    Kept
+                    保留
                   </>
                 ) : (
                   <>
                     <EyeOff className="h-3 w-3" />
-                    Redacted
+                    脱敏
                   </>
                 )}
               </Button>
@@ -129,7 +129,7 @@ export function PrivacyPanel() {
         <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
           <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600" />
           <p className="text-xs text-amber-700">
-            Some findings are pending review. Toggle each to redacted or kept before continuing.
+            部分发现尚未处理。请在继续前将每项标记为脱敏或保留。
           </p>
         </div>
       )}
@@ -145,7 +145,7 @@ export function PrivacyPanel() {
           privacyAcknowledged && "bg-emerald-600 hover:bg-emerald-700",
         )}
       >
-        {privacyAcknowledged ? "Confirmed" : "Confirm & Continue"}
+        {privacyAcknowledged ? "已确认" : "确认并继续"}
       </Button>
     </div>
   );

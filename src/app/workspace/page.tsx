@@ -16,13 +16,13 @@ export default function WorkspacePage() {
     <div className="flex h-screen flex-col bg-background">
       {/* Top bar */}
       <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-3">
-        <h1 className="text-lg font-semibold text-slate-900">Workspace</h1>
+        <h1 className="text-lg font-semibold text-slate-900">工作台</h1>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={() => store.loadDemo()}>
-            Load Demo
+            加载示例
           </Button>
           <Button variant="ghost" size="sm" onClick={() => store.reset()}>
-            Reset
+            重置
           </Button>
         </div>
       </header>
@@ -33,9 +33,9 @@ export default function WorkspacePage() {
         <div className="flex w-1/2 flex-col gap-4 overflow-y-auto border-r border-slate-200 p-6">
           {/* Task title */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">Task Title</label>
+            <label className="text-sm font-medium text-slate-700">任务标题</label>
             <Textarea
-              placeholder="e.g. Build a REST API for user management"
+              placeholder="例：为 SkyNotify 搭建用户管理 REST API"
               value={store.taskTitle}
               onChange={(e) => store.setTaskTitle(e.target.value)}
               rows={2}
@@ -45,9 +45,9 @@ export default function WorkspacePage() {
 
           {/* Desired outcome */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">Desired Outcome</label>
+            <label className="text-sm font-medium text-slate-700">期望结果</label>
             <Textarea
-              placeholder="What should the next agent achieve after receiving this context?"
+              placeholder="下一个智能体 Agent 接手此上下文后应达成什么目标？"
               value={store.desiredOutcome}
               onChange={(e) => store.setDesiredOutcome(e.target.value)}
               rows={2}

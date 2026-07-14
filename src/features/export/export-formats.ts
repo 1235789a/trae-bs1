@@ -4,12 +4,12 @@ import YAML from "yaml";
 
 export function exportMarkdown(pkg: CanonicalContextPackage): string {
   const lines = [
-    "# ContextMirror Handoff Pack",
+    "# ContextMirror 交接包",
     "",
-    `- Package: ${pkg.packageId}`,
-    `- Generated: ${pkg.generatedAt}`,
-    `- Schema: ${pkg.schemaVersion}`,
-    `- Readiness: ${pkg.readiness.score}/100 (${pkg.readiness.level})`,
+    `- 包 ID: ${pkg.packageId}`,
+    `- 生成时间: ${pkg.generatedAt}`,
+    `- Schema 版本: ${pkg.schemaVersion}`,
+    `- 交接完整度: ${pkg.readiness.score}/100 (${pkg.readiness.level})`,
     "",
     "---",
     "",
@@ -20,15 +20,15 @@ export function exportMarkdown(pkg: CanonicalContextPackage): string {
   ];
 
   if (pkg.contradictions.length > 0) {
-    lines.push("## Contradictions");
+    lines.push("## 冲突信息");
     pkg.contradictions.forEach((c) => {
-      lines.push(`- ${c.description} (resolution: ${c.resolution})`);
+      lines.push(`- ${c.description} (处理方式: ${c.resolution})`);
     });
     lines.push("");
   }
 
   if (pkg.evidence.length > 0) {
-    lines.push("## Evidence");
+    lines.push("## 原文依据");
     pkg.evidence.forEach((e) => {
       lines.push(`- ${e.id}: ${e.sourceName} L${e.startLine}-L${e.endLine}`);
       lines.push(`  > ${e.quote}`);

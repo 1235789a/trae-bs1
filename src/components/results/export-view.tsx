@@ -62,7 +62,7 @@ export function ExportView({ pkg }: ExportViewProps) {
     <div className="flex flex-col gap-4">
       {/* Format selector */}
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-slate-800">Export Format</h3>
+        <h3 className="text-sm font-semibold text-slate-800">导出格式</h3>
         <div className="flex gap-2">
           {FORMATS.map((fmt) => {
             const Icon = fmt.icon;
@@ -85,10 +85,10 @@ export function ExportView({ pkg }: ExportViewProps) {
 
       {/* Actions */}
       <div className="flex items-center gap-2">
-        <CopyButton text={content} label="Copy" />
+        <CopyButton text={content} label="复制" />
         <Button variant="outline" size="sm" onClick={handleDownload} className="gap-1.5">
           <Download className="h-3.5 w-3.5" />
-          Download
+          下载
         </Button>
         <span className="ml-auto text-xs text-slate-500">
           {lineCount.toLocaleString()} lines

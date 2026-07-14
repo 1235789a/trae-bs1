@@ -39,20 +39,20 @@ export function SourceEditor() {
           htmlFor="source-text"
           className="text-sm font-medium text-slate-700"
         >
-          Paste your context
+          上下文来源
         </label>
         <span className="text-xs text-slate-500">
           {sourceText.length.toLocaleString()} / {INPUT_MAX_CHARS.toLocaleString()}
           {remaining <= 5000 && remaining > 0 && (
-            <span className="ml-1 text-amber-600">({remaining.toLocaleString()} remaining)</span>
+            <span className="ml-1 text-amber-600">（剩余 {remaining.toLocaleString()} 字符）</span>
           )}
-          {overMax && <span className="ml-1 text-red-600">(over limit)</span>}
+          {overMax && <span className="ml-1 text-red-600">（超出限制）</span>}
         </span>
       </div>
 
       <Textarea
         id="source-text"
-        placeholder="Paste your conversation, README, requirements doc, notes, or any context you want to compile into a structured handoff package..."
+        placeholder="请粘贴你的对话记录、README、需求文档、笔记或任何需要编译为结构化交接包的上下文文本..."
         value={sourceText}
         onChange={handleChange}
         rows={12}
@@ -63,9 +63,9 @@ export function SourceEditor() {
         <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
           <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600" />
           <p className="text-xs text-amber-700">
-            Minimum {INPUT_MIN_CHARS} characters required to compile.{" "}
+            至少需要 {INPUT_MIN_CHARS} 个字符才能编译。{" "}
             <span className="font-medium">
-              {INPUT_MIN_CHARS - sourceText.length} more needed.
+              还需要 {INPUT_MIN_CHARS - sourceText.length} 个字符。
             </span>
           </p>
         </div>
@@ -75,7 +75,7 @@ export function SourceEditor() {
         <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2">
           <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" />
           <p className="text-xs text-red-700">
-            Text exceeds maximum of {INPUT_MAX_CHARS.toLocaleString()} characters. Please trim your input.
+            文本超出最大限制 {INPUT_MAX_CHARS.toLocaleString()} 个字符，请精简输入内容。
           </p>
         </div>
       )}

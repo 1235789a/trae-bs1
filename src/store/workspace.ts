@@ -85,7 +85,7 @@ export const useWorkspace = create<WorkspaceState>((set) => ({
         taskTitle: pkg.task.title,
         desiredOutcome: pkg.task.desiredOutcome,
         targetAgent: pkg.task.targetAgent,
-        sourceText: "[Built-in TRAE Contest Demo - loaded from fixture]",
+        sourceText: "[内置 TRAE 大赛演示 - 从示例数据加载]",
         sourceName: pkg.task.title,
         findings: pkg.privacyReport.findings,
         privacyAcknowledged: true,

@@ -13,6 +13,13 @@ import type { CanonicalContextPackage, ItemStatus } from "@/schemas/context-pack
 /*  Status icon helper                                                 */
 /* ------------------------------------------------------------------ */
 
+const STATUS_LABEL: Record<ItemStatus, string> = {
+  confirmed: "已确认",
+  inferred: "推断",
+  conflicted: "冲突",
+  unknown: "未知",
+};
+
 const STATUS_ICON: Record<ItemStatus, React.ElementType> = {
   confirmed: CheckCircle2,
   inferred: CircleDot,
@@ -77,7 +84,7 @@ function renderItemCard(item: Item) {
             <CardTitle className="text-slate-800">{item.title}</CardTitle>
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="text-[10px]">
-                {item.status}
+                {STATUS_LABEL[item.status]}
               </Badge>
               <ConfidenceBar value={item.confidence} />
             </div>
@@ -110,7 +117,7 @@ function renderDecisionCard(d: CanonicalContextPackage["decisions"][number]) {
           <div className="flex flex-col gap-1 flex-1 min-w-0">
             <CardTitle className="text-slate-800">{d.title}</CardTitle>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="text-[10px]">{d.status}</Badge>
+              <Badge variant="secondary" className="text-[10px]">{STATUS_LABEL[d.status]}</Badge>
               <ConfidenceBar value={d.confidence} />
             </div>
           </div>
@@ -120,13 +127,13 @@ function renderDecisionCard(d: CanonicalContextPackage["decisions"][number]) {
         <p className="text-sm text-slate-600 leading-relaxed">{d.content}</p>
         {d.rationale && (
           <div className="rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
-            <span className="font-medium text-slate-700">Rationale: </span>
+            <span className="font-medium text-slate-700">理由: </span>
             {d.rationale}
           </div>
         )}
         {d.alternativesRejected.length > 0 && (
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wide">Rejected Alternatives</span>
+            <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wide">已排除选项</span>
             <div className="flex flex-wrap gap-1">
               {d.alternativesRejected.map((alt, i) => (
                 <span key={i} className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
@@ -188,7 +195,7 @@ function NextActionsSection({ items }: { items: CanonicalContextPackage["nextAct
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-slate-800">Next Actions</h3>
+        <h3 className="text-sm font-semibold text-slate-800">下一步行动</h3>
         <Badge variant="secondary" className="text-[10px]">{items.length}</Badge>
       </div>
       <div className="flex flex-col gap-2">
@@ -201,13 +208,13 @@ function NextActionsSection({ items }: { items: CanonicalContextPackage["nextAct
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-slate-800">{a.title}</span>
                     <span className={cn("inline-flex rounded px-1.5 py-0.5 text-[10px] font-semibold", priorityColor[a.priority])}>
-                      {a.priority}
+                      {a.priority}（{a.priority === "P0" ? "最高" : a.priority === "P1" ? "高" : "中"}优先级）
                     </span>
-                    <Badge variant="outline" className="text-[10px]">{a.owner}</Badge>
+                    <Badge variant="outline" className="text-[10px]">{a.owner === "next_agent" ? "由你执行" : a.owner === "user" ? "由用户执行" : a.owner}</Badge>
                   </div>
                   <p className="text-xs text-slate-600">{a.content}</p>
                   <p className="text-[10px] text-slate-500">
-                    Done when: {a.doneWhen}
+                    完成标准: {a.doneWhen}
                   </p>
                   <ConfidenceBar value={a.confidence} />
                 </div>
@@ -229,7 +236,7 @@ function ContradictionsSection({ items }: { items: CanonicalContextPackage["cont
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
-        <h3 className="text-sm font-semibold text-slate-800">Contradictions</h3>
+        <h3 className="text-sm font-semibold text-slate-800">冲突信息</h3>
         <Badge variant="destructive" className="text-[10px]">{items.length}</Badge>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
@@ -278,7 +285,7 @@ export function ContextPackView({ pkg }: ContextPackViewProps) {
       {/* Summary */}
       <Card>
         <CardHeader>
-          <CardTitle>Summary</CardTitle>
+          <CardTitle>摘要</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
           <p className="text-sm font-medium text-slate-800">{pkg.summary.oneSentence}</p>
@@ -289,34 +296,34 @@ export function ContextPackView({ pkg }: ContextPackViewProps) {
       {/* Task info */}
       <Card>
         <CardHeader>
-          <CardTitle>Task</CardTitle>
+          <CardTitle>任务信息</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-2 gap-3 text-sm">
           <div>
-            <span className="text-xs text-slate-500">Title</span>
+            <span className="text-xs text-slate-500">任务标题</span>
             <p className="font-medium text-slate-800">{pkg.task.title}</p>
           </div>
           <div>
-            <span className="text-xs text-slate-500">Target Agent</span>
+            <span className="text-xs text-slate-500">目标智能体</span>
             <Badge className="mt-0.5">{pkg.task.targetAgent}</Badge>
           </div>
           <div className="col-span-2">
-            <span className="text-xs text-slate-500">Desired Outcome</span>
+            <span className="text-xs text-slate-500">期望结果</span>
             <p className="text-slate-700">{pkg.task.desiredOutcome}</p>
           </div>
         </CardContent>
       </Card>
 
       {/* Sections */}
-      <Section title="Objectives" count={pkg.objective.length}>
+      <Section title="项目目标" count={pkg.objective.length}>
         {pkg.objective.map(renderItemCard)}
       </Section>
 
-      <Section title="Current State" count={pkg.currentState.length}>
+      <Section title="当前状态" count={pkg.currentState.length}>
         {pkg.currentState.map(renderItemCard)}
       </Section>
 
-      <Section title="Facts" count={pkg.facts.length}>
+      <Section title="已确认事实" count={pkg.facts.length}>
         {pkg.facts.map(renderItemCard)}
       </Section>
 
@@ -324,7 +331,7 @@ export function ContextPackView({ pkg }: ContextPackViewProps) {
       {pkg.decisions.length > 0 && (
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold text-slate-800">Decisions</h3>
+            <h3 className="text-sm font-semibold text-slate-800">关键决策</h3>
             <Badge variant="secondary" className="text-[10px]">{pkg.decisions.length}</Badge>
           </div>
           <div className="grid gap-3 md:grid-cols-2">
@@ -333,23 +340,23 @@ export function ContextPackView({ pkg }: ContextPackViewProps) {
         </div>
       )}
 
-      <Section title="Constraints" count={pkg.constraints.length}>
+      <Section title="约束条件" count={pkg.constraints.length}>
         {pkg.constraints.map(renderItemCard)}
       </Section>
 
-      <Section title="Preferences" count={pkg.preferences.length}>
+      <Section title="用户偏好" count={pkg.preferences.length}>
         {pkg.preferences.map(renderItemCard)}
       </Section>
 
-      <Section title="Risks" count={pkg.risks.length}>
+      <Section title="风险" count={pkg.risks.length}>
         {pkg.risks.map((r) => renderItemCard(r))}
       </Section>
 
-      <Section title="Rejected Options" count={pkg.rejectedOptions.length}>
+      <Section title="已排除选项" count={pkg.rejectedOptions.length}>
         {pkg.rejectedOptions.map(renderItemCard)}
       </Section>
 
-      <Section title="Open Questions" count={pkg.openQuestions.length}>
+      <Section title="待确认问题" count={pkg.openQuestions.length}>
         {pkg.openQuestions.map(renderItemCard)}
       </Section>
 

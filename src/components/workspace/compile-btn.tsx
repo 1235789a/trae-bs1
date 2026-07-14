@@ -39,8 +39,8 @@ export function CompileButton() {
 
       const body = {
         task: {
-          title: taskTitle || "Untitled Task",
-          desiredOutcome: desiredOutcome || "Continue the project based on provided context",
+          title: taskTitle || "未命名任务",
+          desiredOutcome: desiredOutcome || "基于提供的上下文继续项目",
           targetAgent,
           outputLanguage: "zh-CN" as const,
         },
@@ -81,7 +81,7 @@ export function CompileButton() {
         repaired: json.meta?.repaired,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Compile failed");
+      setError(err instanceof Error ? err.message : "编译失败");
     }
   }, [
     sourceText,
@@ -105,12 +105,12 @@ export function CompileButton() {
       {compiling ? (
         <>
           <Loader2 className="h-5 w-5 animate-spin" />
-          Compiling...
+          编译中...
         </>
       ) : (
         <>
           <Zap className="h-5 w-5" />
-          Compile Context
+          编译上下文
         </>
       )}
     </Button>

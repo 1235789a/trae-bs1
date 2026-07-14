@@ -11,7 +11,7 @@ export interface CopyButtonProps {
   label?: string;
 }
 
-export function CopyButton({ text, className, label = "Copy" }: CopyButtonProps) {
+export function CopyButton({ text, className, label = "复制" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
@@ -44,7 +44,7 @@ export function CopyButton({ text, className, label = "Copy" }: CopyButtonProps)
       {copied ? (
         <>
           <Check className="h-3.5 w-3.5 text-emerald-600" />
-          <span className="text-emerald-600">Copied</span>
+          <span className="text-emerald-600">已复制</span>
         </>
       ) : (
         <>

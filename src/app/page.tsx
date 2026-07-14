@@ -6,21 +6,21 @@ import { Header } from "@/components/shared/header";
 const features = [
   {
     icon: Shield,
-    title: "Traceable",
+    title: "可追溯",
     description:
-      "Every compiled context line maps back to its source segment. Full provenance chain, zero information loss.",
+      "每条编译后的上下文信息都映射回源文本片段，形成完整的溯源链，零信息丢失。",
   },
   {
     icon: Zap,
-    title: "Executable",
+    title: "可执行",
     description:
-      "Context packs include structured task definitions, acceptance criteria, and next-step instructions that agents can act on immediately.",
+      "上下文包 Context Pack 包含结构化的任务定义、验收标准和下一步指令，Agent 可立即执行。",
   },
   {
     icon: GitBranch,
-    title: "Transferable",
+    title: "可交接",
     description:
-      "Agent-agnostic output format. Hand off from any agent to any agent -- Claude, GPT, Gemini, or your own model.",
+      "与 Agent 无关的输出格式，支持从任意 Agent 向任意 Agent 交接——Claude、GPT、Gemini 或你自己的模型。",
   },
 ];
 
@@ -34,31 +34,28 @@ export default function HomePage() {
         <section className="flex flex-col items-center justify-center px-6 py-24 text-center">
           <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-sm text-slate-600">
             <Layers className="h-4 w-4" />
-            Agent Handoff Compiler
+            智能体上下文交接编译器
           </div>
 
           <h1 className="mt-6 max-w-3xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            Turn Long Conversations into{" "}
-            <span className="text-blue-600">Actionable Context Packs</span>
+            将长对话转化为{" "}
+            <span className="text-blue-600">可执行的上下文包</span>
           </h1>
 
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-            ContextMirror is a <strong>compiler</strong>, not a summarizer. It
-            traces, structures, and packages your conversation context so the
-            next agent can pick up exactly where you left off -- without losing
-            a single decision or detail.
+            ContextMirror 是一个<strong>编译器</strong>，而不是总结器。它追踪、结构化并打包你的对话上下文，让下一个智能体 Agent 能够无缝接手——不遗漏任何决策和细节。
           </p>
 
           <div className="mt-8 flex items-center gap-4">
             <Link href="/workspace">
               <Button size="lg">
-                Start Compiling
+                开始编译
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/workspace">
               <Button variant="outline" size="lg">
-                Try Demo
+                体验示例
               </Button>
             </Link>
           </div>
@@ -89,7 +86,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white px-6 py-6 text-center text-sm text-slate-500">
-        ContextMirror -- Agent Handoff Compiler
+        ContextMirror｜智能体上下文交接编译器
       </footer>
     </div>
   );

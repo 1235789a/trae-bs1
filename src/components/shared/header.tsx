@@ -27,12 +27,12 @@ export function Header() {
             href="/workspace"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
           >
-            Workspace
+            工作台
           </Link>
 
           {hasResult && (
             <Badge variant={isDemo ? "warning" : "success"}>
-              {isDemo ? "Demo" : "Live"}
+              {isDemo ? "示例模式" : "实时 AI"}
             </Badge>
           )}
         </div>

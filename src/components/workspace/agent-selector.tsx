@@ -28,7 +28,7 @@ export function AgentSelector() {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-sm font-medium text-slate-700">
-        Target Agent
+        目标智能体
       </label>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">

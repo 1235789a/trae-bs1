@@ -4,9 +4,9 @@ export const INPUT_MIN_CHARS = 200;
 export const INPUT_MAX_CHARS = 60_000;
 
 export const AGENT_OPTIONS: { value: TargetAgentType; label: string; description: string }[] = [
-  { value: "coding", label: "Code Agent", description: "Continue development, debug, refactor" },
-  { value: "writing", label: "Writing Agent", description: "Write docs, blogs, reports" },
-  { value: "product", label: "Product Agent", description: "Requirements, PRD, user research" },
-  { value: "research", label: "Research Agent", description: "Tech research, competitive analysis" },
-  { value: "general", label: "General Agent", description: "General task handoff" },
+  { value: "coding", label: "代码 Agent", description: "继续开发、调试、重构" },
+  { value: "writing", label: "写作 Agent", description: "撰写文档、博客、报告" },
+  { value: "product", label: "产品 Agent", description: "需求分析、PRD、用户研究" },
+  { value: "research", label: "研究 Agent", description: "技术调研、竞品分析" },
+  { value: "general", label: "通用 Agent", description: "通用任务交接" },
 ];

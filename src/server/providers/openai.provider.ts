@@ -21,6 +21,8 @@ const COMPILE_SYSTEM_PROMPT = `You are ContextMirror, an AI context handoff comp
 Given raw conversation/project records, extract and structure a CanonicalContextPackage.
 Every fact, decision, and risk must be grounded in the source text.
 
+除 JSON 字段名和技术标识外，所有字段内容必须使用简体中文。代码、框架名称、模型名称、文件路径和专有名词保留原文。
+
 You MUST return a single JSON object with EXACTLY this structure (all fields required):
 
 {

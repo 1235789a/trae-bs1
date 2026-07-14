@@ -140,14 +140,14 @@ export function MindMapView({ pkg }: MindMapViewProps) {
       <div className="flex items-center gap-3">
         <Brain className="h-4 w-4 text-slate-600" />
         <h3 className="text-sm font-semibold text-slate-800">
-          Mind Map
+          Mind Map（思维导图）
         </h3>
         <div className="ml-auto flex items-center gap-2">
           <Badge variant="secondary" className="text-[10px]">
-            {graph.nodes.length} nodes
+            {graph.nodes.length} 个节点
           </Badge>
           <Badge variant="secondary" className="text-[10px]">
-            {branchCount} branches
+            {branchCount} 个分支
           </Badge>
         </div>
       </div>
@@ -163,15 +163,21 @@ export function MindMapView({ pkg }: MindMapViewProps) {
 
       {/* Legend */}
       <div className="flex flex-wrap gap-3 text-xs text-slate-500">
-        {Object.entries(NODE_COLORS).map(([type, colors]) => (
-          <div key={type} className="flex items-center gap-1.5">
-            <span
-              className="inline-block h-3 w-3 rounded-full"
-              style={{ background: colors.fill, border: `1.5px solid ${colors.stroke}` }}
-            />
-            {type}
-          </div>
-        ))}
+        {Object.entries(NODE_COLORS).map(([type, colors]) => {
+          const typeLabel: Record<string, string> = {
+            source: "来源", fact: "事实", decision: "决策", constraint: "约束",
+            rejected: "已排除", risk: "风险", question: "问题", next_action: "下一步",
+          };
+          return (
+            <div key={type} className="flex items-center gap-1.5">
+              <span
+                className="inline-block h-3 w-3 rounded-full"
+                style={{ background: colors.fill, border: `1.5px solid ${colors.stroke}` }}
+              />
+              {typeLabel[type] ?? type}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

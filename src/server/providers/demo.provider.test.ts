@@ -15,7 +15,7 @@ describe("compileDemo", () => {
   it("has expected demo fields", () => {
     const pkg = compileDemo();
     expect(pkg.packageId).toBe("pkg_demo_trae_001");
-    expect(pkg.task.title).toBe("ContextMirror P0 Demo");
+    expect(pkg.task.title).toBe("ContextMirror P0 演示");
     expect(pkg.task.targetAgent).toBe("coding");
   });
 

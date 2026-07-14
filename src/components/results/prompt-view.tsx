@@ -21,7 +21,7 @@ export function PromptView({ pkg }: PromptViewProps) {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-slate-800">
-          Generated Agent Prompt
+          生成的智能体提示词
         </h3>
         <CopyButton text={prompt} />
       </div>
